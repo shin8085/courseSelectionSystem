@@ -17,9 +17,21 @@
                 <a href="change_pw.php" target="right">修改密码</a>
             </td>
         </tr>
+        <?php
+        if($_SESSION['status']=="student"){
+            echo "<tr><td><a href='selected_course.php' target='right'>已选课程</a></td></tr>";
+        }
+        ?>
         <tr>
             <td>
-                <a href="course_info.php" target="right">课程信息</a>
+                <?php
+                if($_SESSION['status']=="student"){
+                    echo "<a href='select_course.php' target='right'>选择课程</a>";
+                }
+                else if($_SESSION['status']=="teacher"){
+                    echo "<a href='commit_course.html' target='right'>提交课程</a>";
+                }
+                ?>
             </td>
         </tr>
     </table>

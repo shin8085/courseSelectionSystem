@@ -18,11 +18,10 @@ class sqlfunction{
         else if($status=="admin"){
             $sql="select Spw from admin where Ano=$username";
         }
-        $pw=mysqli_fetch_array($this->ms->excu($sql));
-        print_r($pw2);
+        $pw=mysqli_fetch_row($this->ms->excu($sql));
         if($pw[0]==$password){
-            $_SESSION['username']=$username;
-            $_SESSION['status']=$status;
+            $_SESSION['username']=$username; //获取账号
+            $_SESSION['status']=$status; //获取登入者身份
             header("location:index.php");
         }
         else{
@@ -31,17 +30,17 @@ class sqlfunction{
     }
     //根据账号获取用户信息
     function getUserInfo(){
-        $username=$_SESSION['username'];
-        $status=$_SESSION['status'];
+        $username=$_SESSION['username']; //获取账号
+        $status=$_SESSION['status']; //获取登入者身份
         $sql="select * from $status where $status[0]no=$username";
-        return mysqli_fetch_array($this->ms->excu($sql));
+        return mysqli_fetch_row($this->ms->excu($sql));
     }
     //修改密码
     function changePassWord($oldpw,$newpw,$newpwagin){
-        $username=$_SESSION['username'];
-        $status=$_SESSION['status'];
+        $username=$_SESSION['username']; //获取账号
+        $status=$_SESSION['status']; //获取登入者身份
         $sql="select $status[0]pw from $status"."user where $status[0]no=$username";
-        $rightpw=mysqli_fetch_array($this->ms->excu($sql))[0];
+        $rightpw=mysqli_fetch_row($this->ms->excu($sql))[0];
         if($oldpw==$rightpw){
             if($newpw==$newpwagin){
                 $sql="update $status"."user set $status[0]pw=$newpw where $status[0]no=$username";
@@ -55,6 +54,65 @@ class sqlfunction{
         else{
             echo "原密码输入错误<br>";
         }
+    }
+    //获取已选课程
+    function getSelectedCourse(){
+        $sno=$_SESSION['username']; //获取学号
+        $sql="select
+                t.cno,
+                t.cname,
+                t.score,
+                teacher.tname
+            from
+                (
+                    select
+                        sc.sno,
+                        sc.cno,
+                        course.cname,
+                        course.tno,
+                        sc.score
+                    from
+                    sc left join course on
+                        sc.cno=course.cno
+                ) t left join teacher on
+                    t.tno=teacher.tno
+            where
+                t.sno=$sno
+            order by t.cno";
+        return $this->ms->excu($sql);
+    }
+    //获取课程信息
+    function getCourseInfo(){
+        $sno=$_SESSION['username']; //获取学号
+        $sql="select
+                c.cno,
+                c.cname,
+                teacher.tname
+            from
+                (
+                    select
+                        *
+                    from
+                        course
+                    where
+                        course.cno not in (
+                                    select
+                                        sc.cno
+                                    from
+                                        sc
+                                    where
+                                        sc.sno=$sno
+                                    )
+                ) c,
+                teacher
+            where
+                c.tno=teacher.tno
+            order by c.cno";
+        return $this->ms->excu($sql);
+    }
+    //选择课程
+    function selectCourse($cno){
+        
     }
 }
 ?>

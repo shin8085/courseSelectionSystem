@@ -11,7 +11,7 @@
     <title>选课系统</title>
 </head>
 <frameset cols="15%,85%" border="false">
-    <frame name="left" src="frame/index_left.html">
+    <frame name="left" src="frame/index_left.php">
     <frame name="right" src="frame/user_info.php">
 </frameset>
 </html>

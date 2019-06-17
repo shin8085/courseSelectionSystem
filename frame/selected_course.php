@@ -7,7 +7,7 @@ $sf=new sqlfunction;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>user_info</title>
+    <title>selected_course</title>
     <style>
         table{
             width:500px;
@@ -21,30 +21,35 @@ $sf=new sqlfunction;
     </style>
 </head>
 <body>
+    <?php
+    $result=$sf->getSelectedCourse();
+    if($result->num_rows==0){
+        echo "您还没有选择课程";
+    }
+    else{
+    ?>
     <table border=1>
         <tr class="tr1">
             <?php
-            $infoarr=$sf->getUserInfo();
-            if(count($infoarr)==4){ //学生
-                echo "<td>学号</td>";
-                echo "<td>姓名</td>";
-                echo "<td>出生日期</td>";
-                echo "<td>性别</td>";
-            }
-            else{ //教师
-                echo "<td>教师编号</td>";
-                echo "<td>姓名</td>";
-            }
+            echo "<td>课程编号</td><td>课程名称</td><td>成绩</td><td>教师</td>";
             ?>
         </tr>
-        <tr>
-            <?php
-            
-            for($i=0;$i<count($infoarr);$i++){
-                echo "<td>$infoarr[$i]</td>";
+        <?php
+            while($row=mysqli_fetch_row($result)){
+        ?>
+            <tr>
+                <?php
+                    for($i=0;$i<count($row);$i++){
+                        echo "<td>$row[$i]</td>";
+                    }
+                ?>
+            </tr>
+        <?php
             }
-            ?>
-        </tr>
+        ?>
     </table>
+    <?php
+    }
+    ?>
 </body>
 </html>

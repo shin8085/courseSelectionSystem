@@ -1,6 +1,8 @@
 <?php
 include "inc/sqlfunction.php";
 $sf=new sqlfunction;
+@$_SESSION['username']="";
+@$_SESSION['status']="";
 ?>
 <!DOCTYPE html>
 <html lang="en">
