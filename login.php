@@ -8,7 +8,7 @@ $sf=new sqlfunction;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>选课系统</title>
+    <title>登入</title>
     <link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
 <body>
@@ -38,7 +38,7 @@ $sf=new sqlfunction;
                 <tr height="30px">
                     <td></td>
                     <td>
-                        <input type="submit" name="login" value="登录" style="margin:0 30px;">
+                        <input type="submit" name="login" value="登入" style="margin:0 30px;">
                         <input type="submit" name="sign" value="注册">
                     </td>
                 </tr>
@@ -46,7 +46,7 @@ $sf=new sqlfunction;
         </form>
         <?php
             $login=@$_POST["login"];
-            if($login=="登录"){
+            if($login=="登入"){
                 $username=@$_POST['username'];
                 $password=@$_POST['password'];
                 $status=@$_POST['status'];
