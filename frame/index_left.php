@@ -29,7 +29,7 @@
                     echo "<a href='select_course.php' target='right'>选择课程</a>";
                 }
                 else if($_SESSION['status']=="teacher"){
-                    echo "<a href='commit_course.html' target='right'>提交课程</a>";
+                    echo "<a href='commit_course.php' target='right'>提交课程</a>";
                 }
                 ?>
             </td>

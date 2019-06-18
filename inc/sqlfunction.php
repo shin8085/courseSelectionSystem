@@ -61,6 +61,8 @@ class sqlfunction{
         $sql="select
                 t.cno,
                 t.cname,
+                t.csite,
+                t.ctime,
                 t.score,
                 teacher.tname
             from
@@ -69,6 +71,8 @@ class sqlfunction{
                         sc.sno,
                         sc.cno,
                         course.cname,
+                        course.csite,
+                        course.ctime,
                         course.tno,
                         sc.score
                     from
@@ -112,7 +116,9 @@ class sqlfunction{
     }
     //选择课程
     function selectCourse($cno){
-        
+        $sno=$_SESSION['username']; //获取学号
+        $sql="insert into SC(sno,cno) values('$sno','$cno')";
+        $this->ms->excu($sql);
     }
 }
 ?>

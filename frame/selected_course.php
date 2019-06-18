@@ -11,12 +11,15 @@ $sf=new sqlfunction;
     <style>
         table{
             width:500px;
-            height:100px;
             text-align:center;
         }
         .tr1{
+            height:30px;
             background:orange;
             color:white;
+        }
+        .tr2{
+            height:30px;
         }
     </style>
 </head>
@@ -31,16 +34,19 @@ $sf=new sqlfunction;
     <table border=1>
         <tr class="tr1">
             <?php
-            echo "<td>课程编号</td><td>课程名称</td><td>成绩</td><td>教师</td>";
+            echo "<td>课程编号</td><td>课程名称</td><td>教室</td><td>上课时间</td><td>成绩</td><td>教师</td>";
             ?>
         </tr>
         <?php
             while($row=mysqli_fetch_row($result)){
         ?>
-            <tr>
+            <tr class="tr2">
                 <?php
                     for($i=0;$i<count($row);$i++){
-                        echo "<td>$row[$i]</td>";
+                        if($i==2&&$row[$i]==null)
+                            echo "<td>暂无成绩</td>";
+                        else
+                            echo "<td>$row[$i]</td>";
                     }
                 ?>
             </tr>

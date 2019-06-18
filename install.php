@@ -43,14 +43,18 @@ echo "数据表Student创建成功<br>";
 $sql="create table Teacher(
     Tno varchar(10) not null primary key unique,
     Tname nvarchar(10),
+    Tage date,
+    Tsex varchar(10),
     constraint kf_teacher_teacheruser foreign key(Tno) references teacheruser(Tno)
     )";
 $ms->excu($sql);
 echo "数据表Teacher创建成功<br>";
 
 $sql="create table Course(
-    Cno varchar(10) not null primary key unique,
+    Cno varchar(10) not null primary key unique auto_increment,
     Cname nvarchar(10),
+    Csite varchar(20),
+    Ctime varchar(10),
     Tno varchar(10),
     constraint fk_course_teacher foreign key(tno) references teacher(tno)
     )";
@@ -79,12 +83,12 @@ $ms->excu("insert into studentuser values('01','123456'),
     ('06','123456'),
     ('07','123456'),
     ('08','123456')");
-echo "数据表studentuser初始化数据加载成功";
+echo "数据表studentuser初始化数据加载成功<br>";
 
 $ms->excu("insert into teacheruser values('01','123456'),
     ('02','123456'),
     ('03','123456')");
-echo "数据表teacheruser初始化数据加载成功";
+echo "数据表teacheruser初始化数据加载成功<br>";
 
 $ms->excu("insert into Student values('01' , '赵雷' , '1990-01-01' , '男')");
 $ms->excu("insert into Student values('02' , '钱电' , '1990-12-21' , '男')");
@@ -96,14 +100,14 @@ $ms->excu("insert into Student values('07' , '郑竹' , '1989-07-01' , '女')");
 $ms->excu("insert into Student values('08' , '王菊' , '1990-01-20' , '女')");
 echo "数据表Student初始化数据加载成功<br>";
 
-$ms->excu("insert into Teacher values('01' , '张三')");
-$ms->excu("insert into Teacher values('02' , '李四')");
-$ms->excu("insert into Teacher values('03' , '王五')");
+$ms->excu("insert into Teacher values('01' , '张三','1978-12-03','男')");
+$ms->excu("insert into Teacher values('02' , '李四','1985-05-06','男')");
+$ms->excu("insert into Teacher values('03' , '王五','1977-06-23','男')");
 echo "数据表Teacher初始化数据加载成功<br>";
 
-$ms->excu("insert into Course values('01' , '语文' , '02')");
-$ms->excu("insert into Course values('02' , '数学' , '01')");
-$ms->excu("insert into Course values('03' , '英语' , '03')");
+$ms->excu("insert into Course values('01' , '语文' ,'C5-103', '周四1-2节','02')");
+$ms->excu("insert into Course values('02' , '数学' ,'C5-103', '周五6-7节','01')");
+$ms->excu("insert into Course values('03' , '英语' ,'C5-103', '周一3-4节','03')");
 echo "数据表Course初始化数据加载成功<br>";
 
 $ms->excu("insert into SC values('01' , '01' , 80)");

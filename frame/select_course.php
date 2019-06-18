@@ -11,12 +11,15 @@ $sf=new sqlfunction;
     <style>
         table{
             width:500px;
-            height:100px;
             text-align:center;
         }
         .tr1{
+            height:30px;
             background:orange;
             color:white;
+        }
+        .tr2{
+            height:30px;
         }
     </style>
 </head>
@@ -38,7 +41,7 @@ $sf=new sqlfunction;
             <?php
                 while($row=mysqli_fetch_row($result)){
             ?>
-                <tr>
+                <tr class="tr2">
                     <?php
                         for($i=0;$i<count($row);$i++){
                             echo "<td>$row[$i]</td>";
@@ -52,8 +55,11 @@ $sf=new sqlfunction;
         </table>
     </form>
     <?php
-    $cno=$_POST['select'];
-    $sf->selectCourse($cno);
+    $cno=@$_POST['select'];
+    if($cno!=""){
+        $sf->selectCourse($cno);
+        header("location:select_course.php");
+    }
     }
     ?>
 </body>
