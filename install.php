@@ -25,7 +25,7 @@ echo "数据表studentuser创建成功<br>";
 
 $sql="create table teacheruser(
     Tno varchar(10) not null primary key unique,
-    Spw varchar(10) not null
+    Tpw varchar(10) not null
 )";
 $ms->excu($sql);
 echo "数据表teacheruser创建成功<br>";
@@ -51,7 +51,7 @@ $ms->excu($sql);
 echo "数据表Teacher创建成功<br>";
 
 $sql="create table Course(
-    Cno varchar(10) not null primary key unique auto_increment,
+    Cno varchar(10) not null primary key unique,
     Cname nvarchar(10),
     Csite varchar(20),
     Ctime varchar(10),

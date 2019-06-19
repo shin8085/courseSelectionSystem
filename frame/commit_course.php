@@ -29,6 +29,10 @@ $tno=$_SESSION['username'];
     <form action="commit_course.php" method="post">
         <table style="height: 120px;">
             <tr>
+                <td>课程编号</td>
+                <td><input type="text" name="cno" autocomplete="off"></td>
+            </tr>
+            <tr>
                 <td>课程名称</td>
                 <td><input type="text" name="cname" autocomplete="off"></td>
             </tr>
@@ -48,13 +52,20 @@ $tno=$_SESSION['username'];
     </form>
     <?php
         if(@$_POST['submit']=="提交"){
+            $cno=$_POST['cno'];
             $cname=$_POST['cname'];
             $csite=$_POST['csite'];
             $ctime=$_POST['ctime'];
-            $sql="insert into course(cname,csite,ctime,tno) values('$cname','$csite','$ctime','$tno')";
-            $ms->excu($sql);
-            echo "课程提交成功";
-           // header("location:")
+            $sql="select * from course where cno=$cno";
+            $result=$ms->excu($sql);
+            if($result->num_rows==0){
+                $sql="insert into course(cno,cname,csite,ctime,tno) values('$cno','$cname','$csite','$ctime','$tno')";
+                $ms->excu($sql);
+                echo "课程提交成功";
+            }
+            else{
+                echo "课程编号已存在";
+            }
         }
     ?>
     <?php

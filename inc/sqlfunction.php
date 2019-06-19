@@ -13,10 +13,10 @@ class sqlfunction{
             $sql="select Spw from studentuser where Sno=$username";
         }
         else if($status=="teacher"){
-            $sql="select Spw from teacheruser where Tno=$username";
+            $sql="select Tpw from teacheruser where Tno=$username";
         }
         else if($status=="admin"){
-            $sql="select Spw from admin where Ano=$username";
+            $sql="select Apw from admin where Ano=$username";
         }
         $pw=mysqli_fetch_row($this->ms->excu($sql));
         if($pw[0]==$password){

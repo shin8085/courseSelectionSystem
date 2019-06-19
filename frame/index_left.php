@@ -1,3 +1,8 @@
+<?php
+include "../inc/mysql.php";
+$ms=new mysql;
+$ms->link("course_select_database");
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +11,15 @@
     <title>index_left</title>
 </head>
 <body>
+    <?php
+        $username=$_SESSION['username'];
+        $status=$_SESSION['status'];
+        $sql="select $status[0]name from $status where $status[0]no=$username";
+        $result=$ms->excu($sql);
+        $row=mysqli_fetch_row($result);
+        echo "你好 $row[0]";
+    ?>
+    <a href="../login.php" target="_top">退出登入</a>
     <table>
         <tr>
             <td>
