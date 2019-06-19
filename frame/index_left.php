@@ -19,7 +19,7 @@ $ms->link("course_select_database");
         $row=mysqli_fetch_row($result);
         echo "你好 $row[0]";
     ?>
-    <a href="../login.php" target="_top">退出登入</a>
+    <a href="../login.php" target="_top">退出登录</a>
     <table>
         <tr>
             <td>
