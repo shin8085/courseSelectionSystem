@@ -53,6 +53,7 @@ $sf=new sqlfunction;
                 }
                 else{
                     for($i=1;$i<count($infoarr);$i++){
+                        
                         echo "<td>$infoarr[$i]</td>";
                     }
                 }

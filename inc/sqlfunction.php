@@ -28,6 +28,33 @@ class sqlfunction{
             echo "账号或密码输入有误";
         }
     }
+    //注册
+    function register($username,$password,$password2,$status){
+        if($username!=""&&$password!=""&&$password2!=""){
+            $sql="select * from $status where $status[0]no=$username";
+            $result=$this->ms->excu($sql);
+            if($result->num_rows==0){
+                if($password==$password2){
+                    $sql="insert into $status"."user values('$username','$password')";
+                    $this->ms->excu($sql);
+                    $sql="insert into $status($status[0]no) values('$username')";
+                    $this->ms->excu($sql);
+                    $_SESSION['username']=$username;
+                    $_SESSION['status']=$status;
+                    header("location:index.php");
+                }
+                else{
+                    echo "两次密码不一致<br>";
+                }
+            }
+            else{
+                echo "该用户已存在<br>";
+            }
+        }
+        else{
+            echo "学号/编号和密码均不能为空<br>";
+        }
+    }
     //根据账号获取用户信息
     function getUserInfo(){
         $username=$_SESSION['username']; //获取账号

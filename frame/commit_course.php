@@ -73,7 +73,7 @@ $tno=$_SESSION['username'];
     $sql="select course.cno,course.cname,course.csite,course.ctime from course where course.tno=$tno";
     $result=$ms->excu($sql);
     if($result->num_rows==0){
-        echo "您还没有提交课程";
+        echo "您还没有提交课程<br>";
     }
     else{
     ?>

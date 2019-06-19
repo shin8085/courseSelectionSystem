@@ -40,15 +40,14 @@ $sf=new sqlfunction;
                 <tr height="30px">
                     <td></td>
                     <td>
-                        <input type="submit" name="login" value="登入" style="margin:0 30px;">
-                        <input type="submit" name="sign" value="注册">
+                        <input type="submit" name="loginin" value="登入" style="margin:0 30px;">
+                        <input type="submit" name="signup" value="注册">
                     </td>
                 </tr>
             </table>
         </form>
         <?php
-            $login=@$_POST["login"];
-            if($login=="登入"){
+            if(@$_POST["loginin"]=="登入"){
                 $username=@$_POST['username'];
                 $password=@$_POST['password'];
                 $status=@$_POST['status'];
@@ -57,6 +56,9 @@ $sf=new sqlfunction;
                 }
                 else
                     echo "账号和密码均不能为空";
+            }
+            else if(@$_POST["signup"]=="注册"){
+                header("location:register.php");
             }
         ?>
     </div>

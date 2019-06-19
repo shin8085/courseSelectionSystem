@@ -43,7 +43,7 @@ $sf=new sqlfunction;
             <tr class="tr2">
                 <?php
                     for($i=0;$i<count($row);$i++){
-                        if($i==2&&$row[$i]==null)
+                        if($i==4&&$row[$i]==null)
                             echo "<td>暂无成绩</td>";
                         else
                             echo "<td>$row[$i]</td>";
