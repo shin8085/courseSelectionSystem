@@ -31,29 +31,62 @@ $sf=new sqlfunction;
     }
     else{
     ?>
-    <table class="table1" border="1">
-        <tr class="tr1">
-            <td>课程编号</td><td>课程名</td><td>上课地点</td><td>上课时间</td><td>教师</td>
-        </tr>
-        <?php
-        while($row=mysqli_fetch_row($result)){
-        ?>
-        <tr>
+    <form action="course_info.php" method="post">
+        <table class="table1" border="1">
+            <tr class="tr1">
+                <td>课程编号</td><td>课程名</td><td>上课地点</td><td>上课时间</td><td>教师</td><td></td>
+            </tr>
             <?php
-            for($i=0;$i<count($row);$i++){
-                if($row[$i]==null){
-                    echo "<td>暂无数据</td>";
+            $k=0;
+            while($row=mysqli_fetch_row($result)){
+            ?>
+            <tr>
+                <?php
+                for($i=0;$i<count($row);$i++){
+                    if(@$_POST["change$k"]=="修改"){
+                        echo "<td><input type='text' name='$i' value='$row[$i]' style='width:90px;'></td>";
+                    }
+                    else{
+                        if($row[$i]==null){
+                            echo "<td>暂无数据</td>";
+                        }
+                        else{
+                            echo "<td>$row[$i]</td>";
+                        }
+                    }
                 }
-                else{
-                    echo "<td>$row[$i]</td>";
-                }
+                ?>
+                <td>
+                    <?php
+                        if(@$_POST["change$k"]=='修改'){
+                            echo "<input type='submit' name='finish$k' value='完成'>";
+                        }
+                        else{
+                            if(@$_POST["finish$k"]=='完成'){
+                                $oldcno=$row[0];
+                                $cno=$_POST['0'];
+                                $cname=$_POST['1'];
+                                $csite=$_POST['2'];
+                                $ctime=$_POST['3'];
+                                $tname=$_POST['4'];
+                                $r=$sf->updateCourseInfo($oldcno,$cno,$cname,$csite,$ctime,$tname);
+                                if($r!=""){
+                                    echo "<Script>alert('课程编号已存在');</Script>";
+                                }
+                                else
+                                    header("location:course_info.php");
+                            }
+                            echo "<input type='submit' name='change$k' value='修改'>";
+                        }
+                        $k++;
+                    ?>
+                </td>
+            </tr>
+            <?php
             }
             ?>
-        </tr>
-        <?php
-        }
-        ?>
-    </table>
+        </table>
+    </form>
     <?php
         }
     ?>

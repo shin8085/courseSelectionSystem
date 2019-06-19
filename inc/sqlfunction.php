@@ -165,5 +165,37 @@ class sqlfunction{
         $result=$this->ms->excu($sql);
         return $result;
     }
+    //更新课程信息
+    function updateCourseInfo($oldcno,$cno,$cname,$csite,$ctime,$tname){
+        $sql="select * from course where cno=$cno";
+        $result=$this->ms->excu($sql);
+        $row=mysqli_fetch_row($result);
+        if($result->num_rows==0||$row[0]==$oldcno){ //课程编号不重复
+            //取消外键约束
+            $sql="alter table sc drop foreign key fk_sc_course";
+            $this->ms->excu($sql);
+            //更新course表
+            $sql="update course set cno='$cno',cname='$cname',csite='$csite',ctime='$ctime' where cno='$oldcno'";
+            $this->ms->excu($sql);
+            //更新sc表
+            $sql="update sc set cno='$cno' where cno='$oldcno'";
+            $this->ms->excu($sql);
+            //增加外键约束
+            $sql="alter table sc add constraint fk_sc_course foreign key(cno) references course(cno)";
+            $this->ms->excu($sql);
+            //获取教师编号
+            $sql="select tno from course where cno=$cno";
+            $result=$this->ms->excu($sql);
+            $row=mysqli_fetch_row($result);
+            $tno=$row[0];
+            //更改教师姓名
+            $sql="update teacher set tname='$tname' where tno=$tno";
+            $this->ms->excu($sql);
+            return "";
+        }
+        else{
+            return "课程编号已存在";
+        }
+    }
 }
 ?>
