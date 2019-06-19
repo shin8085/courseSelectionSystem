@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    height: 100%;
+}
+
+.center{
+    margin: 100px auto 0 auto;
+    width: 500px;
+    height: 100px;
+}

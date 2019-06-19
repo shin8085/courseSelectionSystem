@@ -42,8 +42,9 @@ $sf=new sqlfunction;
                 </tr>
                 <tr height="30px">
                     <td></td>
-                    <td align="center">
-                        <input type="submit" name="register" value="注册">
+                    <td >
+                        <input type="submit" name="register" value="注册" style="margin:0 30px;">
+                        <input type="reset" name="cancel" value="取消">
                     </td>
                 </tr>
             </table>
