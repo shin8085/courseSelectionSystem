@@ -120,5 +120,11 @@ class sqlfunction{
         $sql="insert into SC(sno,cno) values('$sno','$cno')";
         $this->ms->excu($sql);
     }
+    //更新用户信息
+    function updateUserinfo($no,$name,$age,$sex){
+        $status=$_SESSION['status'];
+        $sql="update $status set $status[0]name='$name',$status[0]age='$age',$status[0]sex='$sex' where $status[0]no='$no'";
+        $this->ms->excu($sql);
+    }
 }
 ?>
