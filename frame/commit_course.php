@@ -25,53 +25,20 @@ $tno=$_SESSION['username']; //获取教师编号
         .tr2{
             height:30px;
         }
+        .left{
+            float:left;
+            margin-top:100px;
+            margin-left:150px;
+        }
+        .right{
+            float:right;
+            margin-top:100px;
+            margin-right:150px;
+        }
     </style>
 </head>
 <body>
-    <div class=center>
-        <form action="commit_course.php" method="post">
-            <table style="height: 120px;">
-                <tr>
-                    <td>课程编号</td>
-                    <td><input type="text" name="cno" autocomplete="off"></td>
-                </tr>
-                <tr>
-                    <td>课程名称</td>
-                    <td><input type="text" name="cname" autocomplete="off"></td>
-                </tr>
-                <tr>
-                    <td>教室</td>
-                    <td><input type="text" name="csite" autocomplete="off"></td>
-                </tr>
-                <tr>
-                    <td>上课时间</td>
-                    <td><input type="text" name="ctime" autocomplete="off"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td align="center"><input type="submit" name="submit" value="提交"></td>
-                </tr>
-            </table>
-        </form>
-        <?php
-            if(@$_POST['submit']=="提交"){
-                //获取课程基本信息
-                $cno=$_POST['cno'];
-                $cname=$_POST['cname'];
-                $csite=$_POST['csite'];
-                $ctime=$_POST['ctime'];
-                $sql="select * from course where cno=$cno";
-                $result=$ms->excu($sql);
-                if($result->num_rows==0){
-                    $sql="insert into course(cno,cname,csite,ctime,tno) values('$cno','$cname','$csite','$ctime','$tno')";
-                    $ms->excu($sql);
-                    echo "课程提交成功";
-                }
-                else{
-                    echo "课程编号已存在";
-                }
-            }
-        ?>
+    <div class="left">
         <?php
         //获取已提交的课程
         $sql="select course.cno,course.cname,course.csite,course.ctime from course where course.tno=$tno";
@@ -103,6 +70,57 @@ $tno=$_SESSION['username']; //获取教师编号
         </table>
         <?php
         }
+        ?>
+    </div>
+    <div class="right">
+        <form action="commit_course.php" method="post">
+            <table style="height: 120px;">
+                <tr>
+                    <td>课程编号</td>
+                    <td><input type="text" name="cno" autocomplete="off"></td>
+                </tr>
+                <tr>
+                    <td>课程名称</td>
+                    <td><input type="text" name="cname" autocomplete="off"></td>
+                </tr>
+                <tr>
+                    <td>教室</td>
+                    <td><input type="text" name="csite" autocomplete="off"></td>
+                </tr>
+                <tr>
+                    <td>上课时间</td>
+                    <td><input type="text" name="ctime" autocomplete="off"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td align="center"><input type="submit" name="submit" value="提交"></td>
+                </tr>
+            </table>
+        </form>
+        <?php
+            if(@$_POST['submit']=="提交"){
+                //获取课程基本信息
+                $cno=$_POST['cno'];
+                $cname=$_POST['cname'];
+                $csite=$_POST['csite'];
+                $ctime=$_POST['ctime'];
+                if($cno!=""&&$cname!=""&&$csite!=""&&$ctime!=""){
+                    $sql="select * from course where cno=$cno";
+                    $result=$ms->excu($sql);
+                    if($result->num_rows==0){
+                        $sql="insert into course(cno,cname,csite,ctime,tno) values('$cno','$cname','$csite','$ctime','$tno')";
+                        $ms->excu($sql);
+                        echo "课程提交成功";
+                        header("location:commit_course.php");
+                    }
+                    else{
+                        echo "课程编号已存在";
+                    }
+                }
+                else{
+                    echo "输入内容均不能为空";
+                }
+            }
         ?>
     </div>
 </body>
