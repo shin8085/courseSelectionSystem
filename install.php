@@ -8,63 +8,63 @@ $ms=new mysql;
 $ms->link();
 $ms->create("course_select_database");
 echo "------------数据表创建---------------<br>";
-//管理员账号密码表
+//管理员账户表
 $sql="create table admin(
-    Ano varchar(10) not null unique,
-    Apw varchar(10) not null
+    Ano varchar(10) not null unique comment '管理员账号',
+    Apw varchar(10) not null comment '管理员密码'
 )";
 $ms->excu($sql);
 echo "数据表admin创建成功<br>";
-//学生账号密码表
+//学生账户表
 $sql="create table studentuser(
-    Sno varchar(10) not null primary key unique,
-    Spw varchar(10) not null
+    Sno varchar(10) not null primary key unique comment '学号',
+    Spw varchar(10) not null comment '密码'
 )";
 $ms->excu($sql);
 echo "数据表studentuser创建成功<br>";
-//教师账号密码表
+//教师账户表
 $sql="create table teacheruser(
-    Tno varchar(10) not null primary key unique,
-    Tpw varchar(10) not null
+    Tno varchar(10) not null primary key unique comment '教师编号',
+    Tpw varchar(10) not null comment '密码'
 )";
 $ms->excu($sql);
 echo "数据表teacheruser创建成功<br>";
 //学生信息表
 $sql="create table Student(
-    Sno varchar(10) not null primary key unique,
-    Sname varchar(10),
-    Sage date,
-    Ssex varchar(10),
+    Sno varchar(10) not null primary key unique comment '学号',
+    Sname varchar(10) comment '姓名',
+    Sage date comment '出生日期',
+    Ssex varchar(10) comment '性别',
     constraint kf_student_studentuser foreign key(Sno) references studentuser(Sno)
     )";
 $ms->excu($sql);
 echo "数据表Student创建成功<br>";
 //教师信息表
 $sql="create table Teacher(
-    Tno varchar(10) not null primary key unique,
-    Tname nvarchar(10),
-    Tage date,
-    Tsex varchar(10),
+    Tno varchar(10) not null primary key unique comment '教师编号',
+    Tname nvarchar(10) comment '姓名',
+    Tage date comment '出生日期',
+    Tsex varchar(10) comment '性别',
     constraint kf_teacher_teacheruser foreign key(Tno) references teacheruser(Tno)
     )";
 $ms->excu($sql);
 echo "数据表Teacher创建成功<br>";
 //课程信息表
 $sql="create table Course(
-    Cno varchar(10) not null primary key unique,
-    Cname nvarchar(10),
-    Csite varchar(20),
-    Ctime varchar(10),
-    Tno varchar(10),
+    Cno varchar(10) not null primary key unique comment '课程编号',
+    Cname nvarchar(10) comment '课程名',
+    Csite varchar(20) comment '上课地点',
+    Ctime varchar(10) comment '上课时间',
+    Tno varchar(10) comment '教师编号',
     constraint fk_course_teacher foreign key(tno) references teacher(tno)
     )";
 $ms->excu($sql);
 echo "数据表Course创建成功<br>";
-//成绩表
+//成绩信息表
 $sql="create table SC(
-    Sno varchar(10) not null,
-    Cno varchar(10) not null,
-    score decimal(18,1),
+    Sno varchar(10) not null comment '学号',
+    Cno varchar(10) not null comment '课程编号',
+    score decimal(18,1) comment '成绩',
     constraint fk_sc_student foreign key(Sno) references student(sno),
     constraint fk_sc_course  foreign key(Cno) references Course(cno)
     )";
