@@ -1,10 +1,11 @@
 <?php
 include "mysql.php";
+//通过该类中的函数可对数据库进行相应的操作
 class sqlfunction{
     private $ms;
     function sqlfunction(){
         $this->ms=new mysql;
-        $this->ms->link("course_select_database");
+        $this->ms->link("course_select_database"); //连接数据库
     }
     //登录
     function login($username,$password,$status){
@@ -22,7 +23,7 @@ class sqlfunction{
         if($pw[0]==$password){
             $_SESSION['username']=$username; //获取账号
             $_SESSION['status']=$status; //获取登录者身份
-            header("location:index.php");
+            header("location:index.php"); //跳转至index页面
         }
         else{
             echo "账号或密码输入有误";
@@ -30,13 +31,15 @@ class sqlfunction{
     }
     //注册
     function register($username,$password,$password2,$status){
-        if($username!=""&&$password!=""&&$password2!=""){
+        if($username!=""&&$password!=""&&$password2!=""){ //输入数据不为空
             $sql="select * from $status where $status[0]no=$username";
             $result=$this->ms->excu($sql);
-            if($result->num_rows==0){
+            if($result->num_rows==0){ //判断表中是否已存在$username
                 if($password==$password2){
+                    //插入对应账号密码表中
                     $sql="insert into $status"."user values('$username','$password')";
                     $this->ms->excu($sql);
+                    //插入对应的信息表中
                     $sql="insert into $status($status[0]no) values('$username')";
                     $this->ms->excu($sql);
                     $_SESSION['username']=$username;
@@ -68,8 +71,8 @@ class sqlfunction{
         $status=$_SESSION['status']; //获取登录者身份
         $sql="select $status[0]pw from $status"."user where $status[0]no=$username";
         $rightpw=mysqli_fetch_row($this->ms->excu($sql))[0];
-        if($oldpw==$rightpw){
-            if($newpw==$newpwagin){
+        if($oldpw==$rightpw){ //判断原密码是否正确
+            if($newpw==$newpwagin){ //判断两次密码是否一致
                 $sql="update $status"."user set $status[0]pw=$newpw where $status[0]no=$username";
                 $this->ms->excu($sql);
                 echo "修改密码成功<br>";
@@ -85,6 +88,7 @@ class sqlfunction{
     //获取已选课程
     function getSelectedCourse(){
         $sno=$_SESSION['username']; //获取学号
+        //获取预选课程的信息
         $sql="select
                 t.cno,
                 t.cname,
@@ -112,12 +116,15 @@ class sqlfunction{
             order by t.cno";
         return $this->ms->excu($sql);
     }
-    //获取课程信息
+    //获取未选择的课程信息
     function getCourseInfo(){
         $sno=$_SESSION['username']; //获取学号
+        //获取未选择的课程信息
         $sql="select
                 c.cno,
                 c.cname,
+                c.csite,
+                c.ctime,
                 teacher.tname
             from
                 (
@@ -149,17 +156,23 @@ class sqlfunction{
     }
     //更新用户信息
     function updateUserinfo($no,$name,$age,$sex){
-        $status=$_SESSION['status'];
-        $sql="update $status set $status[0]name='$name',$status[0]age='$age',$status[0]sex='$sex' where $status[0]no='$no'";
-        $this->ms->excu($sql);
+        if($name!=""&&$age!=""&&$sex!=""){
+            $status=$_SESSION['status'];
+            $sql="update $status set $status[0]name='$name',$status[0]age='$age',$status[0]sex='$sex' where $status[0]no='$no'";
+            $this->ms->excu($sql);
+        }
+        else{
+            echo "<Script>alert('输入信息均不能为空')</Script>";
+        }
+        
     }
     //获取学生、教师、课程信息
     function getInfo($infoObject){
         $sql="";
-        if($infoObject=="course"){
+        if($infoObject=="course"){ //获取课程信息
             $sql="select cno,cname,csite,ctime,tname from course,teacher where course.tno=teacher.tno";
         }
-        else{
+        else{ //获取学生或教师信息
             $sql="select * from $infoObject";
         }
         $result=$this->ms->excu($sql);

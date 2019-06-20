@@ -1,3 +1,4 @@
+<!----------------学生选择课程界面------------------->
 <?php
 include "../inc/sqlfunction.php";
 $sf=new sqlfunction;
@@ -37,7 +38,7 @@ $sf=new sqlfunction;
             <table border=1>
                 <tr class="tr1">
                     <?php
-                    echo "<td>课程编号</td><td>课程名称</td><td>教师</td><td>选课</td>";
+                    echo "<td>课程编号</td><td>课程名称</td><td>教室</td><td>上课时间</td><td>教师</td><td>选课</td>";
                     ?>
                 </tr>
                 <?php

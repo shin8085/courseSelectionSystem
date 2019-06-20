@@ -1,3 +1,4 @@
+<!----------------??/?????------------------->
 <?php
     if($_SESSION['username']==""||$_SESSION['status']=="admin"){
         header("location:login.php");

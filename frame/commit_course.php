@@ -1,8 +1,9 @@
+<!----------------教师提交课程界面------------------->
 <?php
 include "../inc/mysql.php";
 $ms=new mysql;
 $ms->link("course_select_database");
-$tno=$_SESSION['username'];
+$tno=$_SESSION['username']; //获取教师编号
 ?>
 <html lang="en">
 <head>
@@ -54,6 +55,7 @@ $tno=$_SESSION['username'];
         </form>
         <?php
             if(@$_POST['submit']=="提交"){
+                //获取课程基本信息
                 $cno=$_POST['cno'];
                 $cname=$_POST['cname'];
                 $csite=$_POST['csite'];

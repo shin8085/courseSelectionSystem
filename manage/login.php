@@ -1,3 +1,4 @@
+<!----------------管理员登录界面------------------->
 <?php
 include "../inc/sqlfunction.php";
 $sf=new sqlfunction;
@@ -39,8 +40,8 @@ $_SESSION['status']="";
         </form>
         <?php
         if(@$_POST['loginin']=="登录"){
-            $username=$_POST['username'];
-            $password=$_POST['password'];
+            $username=$_POST['username']; //获取管理员账号
+            $password=$_POST['password']; //获取管理员密码
             $sf->login($username,$password,"admin");
         }
         ?>

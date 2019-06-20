@@ -1,3 +1,4 @@
+<!----------------教师信息界面------------------->
 <?php
 include "../../inc/sqlfunction.php";
 $sf=new sqlfunction;

@@ -1,3 +1,4 @@
+<!----------------学生已选课程界面------------------->
 <?php
 include "../inc/sqlfunction.php";
 $sf=new sqlfunction;

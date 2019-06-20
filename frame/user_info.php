@@ -1,3 +1,4 @@
+<!----------------用户信息界面------------------->
 <?php
 include "../inc/sqlfunction.php";
 $sf=new sqlfunction;
@@ -55,8 +56,11 @@ $sf=new sqlfunction;
                     }
                     else{
                         for($i=1;$i<count($infoarr);$i++){
-                            
-                            echo "<td>$infoarr[$i]</td>";
+                            if($infoarr[$i]==null){
+                                echo "<td>暂无信息</td>";
+                            }
+                            else
+                                echo "<td>$infoarr[$i]</td>";
                         }
                     }
                     ?>
@@ -67,6 +71,7 @@ $sf=new sqlfunction;
                             }
                             else{
                                 if(@$_POST['finish']=='完成'){
+                                    //获取用户基本信息
                                     $tno=$_SESSION['username'];
                                     $tname=@$_POST['1'];
                                     $tage=@$_POST['2'];

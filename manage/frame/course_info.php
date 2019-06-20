@@ -1,3 +1,4 @@
+<!----------------课程信息界面------------------->
 <?php
 include "../../inc/sqlfunction.php";
 $sf=new sqlfunction;
@@ -65,6 +66,7 @@ $sf=new sqlfunction;
                             }
                             else{
                                 if(@$_POST["finish$k"]=='完成'){
+                                    //获取要修改的课程信息
                                     $oldcno=$row[0];
                                     $cno=$_POST['0'];
                                     $cname=$_POST['1'];

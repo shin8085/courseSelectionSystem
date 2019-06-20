@@ -1,8 +1,9 @@
+<!----------------学生/教师登录界面------------------->
 <?php
 include "inc/sqlfunction.php";
 $sf=new sqlfunction;
-@$_SESSION['username']="";
-@$_SESSION['status']="";
+@$_SESSION['username']=""; //用户名（学号/教师编号）
+@$_SESSION['status']=""; //身份（学生/老师—）
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,11 +49,11 @@ $sf=new sqlfunction;
         </form>
         <?php
             if(@$_POST["loginin"]=="登录"){
-                $username=@$_POST['username'];
-                $password=@$_POST['password'];
-                $status=@$_POST['status'];
+                $username=@$_POST['username']; //获取账号
+                $password=@$_POST['password']; //获取密码
+                $status=@$_POST['status']; //获取用户身份
                 if(@$username!=""&&@$password!=""){
-                    $sf->login($username,$password,$status);
+                    $sf->login($username,$password,$status); //登录
                 }
                 else
                     echo "账号和密码均不能为空";

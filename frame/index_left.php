@@ -1,3 +1,4 @@
+<!----------------学生/教师主页面右侧功能界面------------------->
 <?php
 include "../inc/mysql.php";
 $ms=new mysql;
@@ -16,6 +17,7 @@ $ms->link("course_select_database");
         <?php
             $username=$_SESSION['username'];
             $status=$_SESSION['status'];
+            //获取用户名字
             $sql="select $status[0]name from $status where $status[0]no=$username";
             $result=$ms->excu($sql);
             $row=mysqli_fetch_row($result);

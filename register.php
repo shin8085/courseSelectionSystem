@@ -1,3 +1,4 @@
+<!----------------学生/教师注册界面------------------->
 <?php
 include "inc/sqlfunction.php";
 $sf=new sqlfunction;
@@ -51,11 +52,11 @@ $sf=new sqlfunction;
         </form>
         <?php
         if(@$_POST['register']=='注册'){
-            $username=@$_POST['username'];
-            $password=@$_POST['password'];
-            $password2=@$_POST['password2'];
-            $status=@$_POST['status'];
-            $sf->register($username,$password,$password2,$status);
+            $username=@$_POST['username']; //获取账号
+            $password=@$_POST['password']; //获取密码
+            $password2=@$_POST['password2']; //获取再次输入的密码
+            $status=@$_POST['status']; //获取用户身份
+            $sf->register($username,$password,$password2,$status); //注册
         }
         ?>
     </div>

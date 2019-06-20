@@ -1,3 +1,4 @@
+<!----------------修改密码界面------------------->
 <?php
 include "../inc/sqlfunction.php";
 $sf=new sqlfunction;
@@ -39,8 +40,8 @@ $sf=new sqlfunction;
         if(@$_POST['change']=="修改"){
             $username=$_SESSION['username'];
             $status=$_SESSION['status'];
-            $oldpw=$_POST['oldpw'];
-            $newpw=$_POST['newpw'];
+            $oldpw=$_POST['oldpw']; //旧密码
+            $newpw=$_POST['newpw'];  //新密码
             $newpwagin=$_POST['newpwagain'];
             $sf->changePassWord($oldpw,$newpw,$newpwagin);
         }

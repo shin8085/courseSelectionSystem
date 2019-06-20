@@ -1,3 +1,4 @@
+<!----------------管理员主界面界面------------------->
 <?php
     if($_SESSION['username']==""){
         header("location:login.php");
