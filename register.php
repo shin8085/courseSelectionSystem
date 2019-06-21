@@ -1,5 +1,6 @@
 <!----------------学生/教师注册界面------------------->
 <?php
+if(!session_id()) session_start();
 include "inc/sqlfunction.php";
 $sf=new sqlfunction;
 ?>

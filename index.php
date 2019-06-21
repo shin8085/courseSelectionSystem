@@ -1,5 +1,6 @@
 <!----------------??/?????------------------->
 <?php
+if(!session_id()) session_start();
     if($_SESSION['username']==""||$_SESSION['status']=="admin"){
         header("location:login.php");
     }

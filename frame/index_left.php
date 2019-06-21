@@ -1,5 +1,6 @@
 <!----------------学生/教师主页面右侧功能界面------------------->
 <?php
+if(!session_id()) session_start();
 include "../inc/mysql.php";
 $ms=new mysql;
 $ms->link("course_select_database");

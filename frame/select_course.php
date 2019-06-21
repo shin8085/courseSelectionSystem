@@ -1,5 +1,6 @@
 <!----------------学生选择课程界面------------------->
 <?php
+if(!session_id()) session_start();
 include "../inc/sqlfunction.php";
 $sf=new sqlfunction;
 ?>
