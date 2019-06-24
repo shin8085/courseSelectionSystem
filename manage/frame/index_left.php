@@ -1,4 +1,7 @@
 <!----------------管理员主界面右侧界面------------------->
+<?php
+if(!session_id()) session_start();
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
